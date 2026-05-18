@@ -1,0 +1,171 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2d322b",
+                    "surface-bright": "#f7fbf0",
+                    "surface-container": "#ebefe5",
+                    "background": "#f7fbf0",
+                    "text-charcoal": "#212121",
+                    "tertiary": "#923357",
+                    "surface-tint": "#1b6d24",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#ffd9e2",
+                    "surface-container-high": "#e5eadf",
+                    "outline-variant": "#bfcaba",
+                    "tertiary-fixed-dim": "#ffb1c7",
+                    "on-primary-fixed-variant": "#005312",
+                    "primary": "#0d631b",
+                    "tertiary-container": "#b14b6f",
+                    "on-secondary-fixed-variant": "#723600",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#5e2c00",
+                    "inverse-primary": "#88d982",
+                    "on-surface": "#181d17",
+                    "secondary-fixed-dim": "#ffb786",
+                    "on-secondary-fixed": "#311300",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#40493d",
+                    "on-background": "#181d17",
+                    "surface-dim": "#d7dbd2",
+                    "outline": "#707a6c",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#a3f69c",
+                    "surface": "#f7fbf0",
+                    "accent-sky": "#0288D1",
+                    "secondary": "#964900",
+                    "background-warm": "#FAF7F2",
+                    "secondary-fixed": "#ffdcc6",
+                    "surface-white": "#FFFFFF",
+                    "primary-fixed-dim": "#88d982",
+                    "on-primary-fixed": "#002204",
+                    "inverse-on-surface": "#eef2e8",
+                    "on-tertiary-fixed": "#3f001c",
+                    "secondary-container": "#fc820c",
+                    "surface-container-low": "#f1f5eb",
+                    "on-tertiary-fixed-variant": "#7f2448",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#e0e4da",
+                    "on-primary-container": "#cbffc2",
+                    "surface-variant": "#e0e4da",
+                    "primary-container": "#2e7d32",
+                    "on-tertiary-container": "#ffedf0",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "card-padding": "20px",
+                    "base-unit": "4px",
+                    "gutter": "20px",
+                    "section-gap": "24px",
+                    "max-width": "480px"
+            },
+            "fontFamily": {
+                    "body-base": ["Inter"],
+                    "cta-text": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-important": ["Inter"]
+            },
+            "fontSize": {
+                    "body-base": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "cta-text": ["18px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-important": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <style data-stitch-cursor=""></style><style data-stitch-scroll-lock=""></style></head>
+<body class="bg-background-warm min-h-screen flex flex-col font-body-base text-on-surface selection:bg-primary-fixed-dim">
+<!-- Top Navigation (Shell Visibility: Relevant for Brand Identity) -->
+<header class="w-full top-0 sticky bg-background-warm z-50">
+<div class="flex justify-between items-center h-16 px-gutter max-w-max-width mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">menu</span>
+<h1 class="font-headline-md text-headline-md font-semibold text-primary">Habuild Walk</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed shadow-sm">
+<img alt="User profile" data-alt="A close-up portrait of a mature Indian woman with a gentle, kind smile and silver-streaked hair tied back. The lighting is soft and natural, coming from a nearby window, creating a serene and supportive atmosphere. The image uses the warm cream and soft green palette of the Sanchar app, embodying a calm and human visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9svKqVrqJ-V6L0f4ugy1pqNaOZx9g69k1ONd7J3RV3iOmDzLy_yLsMaa2onvUIAVRt7YFKB4q9HE6MjhNrHMy5a2pccxtCNxreckjRSBBXqAVuDI7tgJM1csUc5MH-sjicciXWITknCLmFAr1mpMWVD7UgRW1MpAapgt1zBn3DIP_EQLNYPOqPmqPDa4hX5E8b4lwWyCSH-RyvFLR5anDFte1tCk8mxHuHkjhvA-NIb5gxZ-Vzaqru0pDaTl8nCZ4F8a3-ENOQcE">
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center max-w-max-width mx-auto w-full px-gutter pb-12">
+<!-- Hero Illustration Area -->
+<section class="w-full mt-4 mb-section-gap relative">
+<div class="aspect-[4/5] w-full rounded-[32px] overflow-hidden shadow-sm bg-surface-white">
+<img alt="Woman walking at sunrise" class="w-full h-full object-cover" data-alt="A calm, abstract digital illustration of a woman wearing a soft, flowing cotton saree walking gracefully along a quiet path at sunrise. The background features a glowing, oversized sun in warm orange tones, casting a golden light over a soft green landscape. The visual style is modern tactile, with smooth gradients and a minimalist aesthetic that prioritizes emotional safety and gentle encouragement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATwjttKRJZQQ7En_lddu3xPCFuhPdAnjH_1f3hlrB1k6Rm9rNrC3QJOJJswwsS0s7yioB4Hkhao9v-QvqmN6EPsndMLXiCBVA6hvSPd6XkKagNgcIGmyZW4Sj2mUzoPmIZAHWVvK-aElBVawgDER5buEDVJpf6TCd65W1BcjTYGfkFhXIPR6zO0kfZYDFJ9oKUiGnhPysxuK8NjJoL84SfCcLhL7Ws6IsVs6Qae31HIdQxbf-9SNefSLH12FkINFWLmSqL8shDhec">
+</div>
+<!-- Floating Social Proof Badge -->
+<div class="absolute bottom-4 left-4 right-4 bg-surface-white/90 backdrop-blur-md p-4 rounded-2xl flex items-center gap-3 shadow-lg">
+<div class="flex -space-x-3">
+<img alt="Community member" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="A small avatar of a woman in her 50s smiling softly, part of a social proof stack for a wellness app. The lighting is warm and the style is consistent with a supportive, calm community aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdUVdQ5vfbDSlQX8wd9huv4OhbLe-_w9ZYWG5Sd8CR3-m5soG4Xy84QDFOY2bTF--NMrC1daS_IIfbx0hEtF-Dqo8y3EBJSILwbGaoUvkqMxxmwdc_--RbKGMrxC_C4Zqlw0fW7K_oHF7FGGTpafnTeXegRQgHxlA3SazIwIPanckPbVuABZr1Ug_oS0dOIpxnQNu3Si3CYIPFQXHfQuNL_IsmUtcnJK1_EpKUihFjbau6oCJNtX2Z0-tODTzhZhGb-gXltJKhebk">
+<img alt="Community member" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="A small profile image of a serene middle-aged woman looking forward with confidence. The background is a soft-focus garden, reflecting the gentle and human personality of the wellness brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPLi8LtBOIX6HCx9Frn1DziDQ1kTE7y1zbRfaPFPfb28yyv6mtKZ1hRuTw3d2VkYe_6sg5emQ1CaxeFvON5RrCOGfNbk9qVQO5NCoKeMW-4LboN7M5p7YO9TNtIVGA-o1o6rKZKiNbtCmMCvW_orEWQCDWg94KMK4QPjLTIuSRJDQ6rhUAEjHpahYwEsIj0bUJuKbN7JouX9kWB_UWbFONv9S7faNEs2AFN3PGfFWkvytZBElGBCWJ5kqbTHCuff2XYtNqsjG32SI">
+<img alt="Community member" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="A small avatar showing a joyful woman during her morning walk, part of a supportive community group. The image uses soft warm tones to maintain a calm and safe visual atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr7xHv9Sy-hZw-V-qIsFnURSTYnBQaAINsb9xfUh7Ysv-k2zBx5Pz2nYgcOavsowC1GDr5BqMcSBz3nQ-qAPGjhz0LAinGv5i8xcKTGhaIVlN_l6Sq-rP7Cb6R_3Fg9K9nSKc0jF8kdBGBCkCDG2GBUnLcr4nHqAT0B-AqgyJlcPnpfM_ICe4EpCgq0KK7GyNktZDKwXWnI5Tq_xrmgUI3TzFL1zxI3aK2sefV9vuIMFcVJfoldnJeCcUyfUJAvJEREwO1d7tCb7E">
+</div>
+<p class="text-[14px] font-medium text-on-surface-variant leading-tight">
+<span class="text-primary font-bold">50,000+</span> women<br>walking today
+                </p>
+</div>
+</section>
+<!-- Messaging Content -->
+<section class="text-center w-full space-y-4">
+<h2 class="font-headline-lg text-headline-lg text-text-charcoal px-2 leading-tight">
+                Walk your way to a better you
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant px-4">
+                A gentle habit for a calmer mind and a healthier body. Join thousands of women on their daily rhythm.
+            </p>
+</section>
+<!-- Actions -->
+<section class="w-full mt-10 space-y-6 flex flex-col items-center">
+<button class="w-full max-w-[320px] h-14 bg-primary text-on-primary font-cta-text text-cta-text rounded-full shadow-md active:scale-95 duration-200 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                Get Started
+                <span class="material-symbols-outlined text-on-primary">arrow_forward</span>
+</button>
+<button class="font-body-base text-body-base text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-150">
+                Already have an account? <span class="text-primary font-semibold">Sign in</span>
+</button>
+</section>
+<!-- Bottom Decorative Element -->
+<div class="mt-12 flex justify-center gap-2">
+<div class="w-8 h-1.5 rounded-full bg-primary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+</div>
+</main>
+<!-- Navigation Shell (Suppressed: Logic - Transactional/Onboarding page) -->
+<!-- FAB (Suppressed: Logic - Not Home/Dashboard) -->
+
+
+</body></html>

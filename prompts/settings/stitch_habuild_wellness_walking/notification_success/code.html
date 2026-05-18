@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e0e4da",
+                    "on-background": "#181d17",
+                    "tertiary": "#923357",
+                    "on-primary-fixed-variant": "#005312",
+                    "outline": "#707a6c",
+                    "primary": "#0d631b",
+                    "secondary-fixed": "#ffdcc6",
+                    "background-warm": "#FAF7F2",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#723600",
+                    "on-secondary-container": "#5e2c00",
+                    "secondary-fixed-dim": "#ffb786",
+                    "on-primary-container": "#cbffc2",
+                    "tertiary-fixed": "#ffd9e2",
+                    "surface-bright": "#f7fbf0",
+                    "surface-dim": "#d7dbd2",
+                    "accent-sky": "#0288D1",
+                    "surface-container-low": "#f1f5eb",
+                    "surface-container-high": "#e5eadf",
+                    "background": "#f7fbf0",
+                    "surface": "#f7fbf0",
+                    "primary-container": "#2e7d32",
+                    "inverse-on-surface": "#eef2e8",
+                    "on-surface": "#181d17",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#40493d",
+                    "surface-tint": "#1b6d24",
+                    "on-tertiary-fixed": "#3f001c",
+                    "outline-variant": "#bfcaba",
+                    "error": "#ba1a1a",
+                    "secondary": "#964900",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#88d982",
+                    "inverse-surface": "#2d322b",
+                    "primary-fixed": "#a3f69c",
+                    "surface-white": "#FFFFFF",
+                    "tertiary-fixed-dim": "#ffb1c7",
+                    "text-charcoal": "#212121",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#002204",
+                    "on-tertiary-fixed-variant": "#7f2448",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#fc820c",
+                    "on-tertiary-container": "#ffedf0",
+                    "on-secondary-fixed": "#311300",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width": "480px",
+                    "card-padding": "20px",
+                    "section-gap": "24px",
+                    "base-unit": "4px",
+                    "gutter": "20px"
+            },
+            "fontFamily": {
+                    "cta-text": ["Inter"],
+                    "body-base": ["Inter"],
+                    "label-important": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "cta-text": ["18px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-base": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-important": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-md-mobile": ["22px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #FAF7F2;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-base text-on-surface">
+<div class="flex flex-col min-h-screen max-w-max-width mx-auto bg-background-warm relative pb-32">
+<!-- TopAppBar -->
+<header class="bg-background-warm dark:bg-on-background fixed top-0 w-full z-40 max-w-max-width mx-auto">
+<div class="flex justify-between items-center w-full px-gutter h-12">
+<button class="text-on-surface-variant dark:text-outline-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile font-semibold text-primary dark:text-primary-fixed">
+                    Habuild Walk<span class="text-secondary">.</span>
+</h1>
+<button class="text-on-surface-variant dark:text-outline-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-20 px-gutter flex flex-col items-center">
+<!-- Central Hero Section -->
+<div class="flex flex-col items-center text-center mt-8 mb-section-gap">
+<div class="w-24 h-24 rounded-full bg-primary-container/20 flex items-center justify-center mb-6">
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">You're all set!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant px-4">Your walking reminders are now active and ready to support you.</p>
+</div>
+<!-- Detail Card -->
+<div class="w-full bg-surface-white rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.04)] mb-section-gap">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="notifications_active">notifications_active</span>
+</div>
+<div>
+<h3 class="font-label-important text-label-important text-on-surface mb-1">Daily Schedule</h3>
+<p class="font-body-base text-body-base text-on-surface-variant">We'll send a gentle nudge on your walking days to help you maintain your rhythm.</p>
+</div>
+</div>
+</div>
+<!-- AI Coach Tip Card (Asymmetric Layout) -->
+<div class="w-full relative">
+<div class="absolute -top-3 -left-2 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-sm uppercase tracking-wider">
+                    Coach Tip
+                </div>
+<div class="bg-secondary-fixed text-on-secondary-container rounded-xl p-card-padding border-l-4 border-secondary shadow-sm">
+<div class="flex gap-4">
+<div class="flex-shrink-0">
+<img alt="Coach Avatar" class="w-12 h-12 rounded-full border-2 border-white" data-alt="A warm, professional portrait illustration of a friendly wellness coach with a supportive expression. The style is modern digital art with soft textures, using a color palette of warm creams, soft oranges, and deep greens to match a health and mindfulness app aesthetic. Lighting is bright and optimistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq9DFPwwsBM0erJS6pwOATGH-0Ex6xDblLTYVtfwle3n1gAvkUIEzuwEuhNsNmVpfSndWoRhwJ-vVZzSLaT4xMx3_cWPIaBD-Ui3iGjo7ouen3o1_JaHMgwBetaUqGwrGxQVeAwdHjEx6EeJPWf7W1xtnOpv7n4KjCytvIl3iUC9-a1d-WMIa4LNLb6YxCUmjrq7crqlV878u3nHEWEjwnA3qq2Sy4VHjFn9gnK-39JK4yQnNrP7T_Et41HHJIJy9hqkc9Wx1sKuY">
+</div>
+<div>
+<p class="font-body-base text-body-base italic leading-relaxed">
+                                "Think of these reminders as a friendly tap on the shoulder. There's no pressure to perform—just an invitation to enjoy a beautiful rhythm of movement today."
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Illustrative Support Image -->
+<div class="mt-section-gap w-full rounded-xl overflow-hidden shadow-sm h-48 relative">
+<img class="w-full h-full object-cover" data-alt="A supportive community illustration representing wellness and walking together." src="https://lh3.googleusercontent.com/aida/ADBb0uj9XeqH7vLyCknfvjXAZscrdTm4hsT6bveLwya7w7-W3SoVkEm4xpGnDp1M0p7F4ysXriRafiEZRL8NayCu6CMqSX67BVqyDg2dkjKPcqvpUMCqSpI3G92AISMFaOwz94qR9R27tV8Nd-iWZvDWBrL7LEL-a3NAdb6psoPFOKv65fRoxPGAF0kp-81dChNhL90Vo--PbHjkG79AeA1BJoHAOawVI9O7eHNBsUeRdoYLJoCkD7O-7N5JSp4">
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+</main>
+<!-- Fixed Primary CTA & Bottom Space -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-max-width bg-gradient-to-t from-background-warm via-background-warm/95 to-transparent pt-8 pb-gutter px-gutter z-50">
+<button class="w-full h-14 bg-primary text-white rounded-full font-cta-text text-cta-text shadow-lg hover:opacity-90 active:scale-95 transition-all duration-150 flex items-center justify-center gap-2">
+                Go to Home
+                <span class="material-symbols-outlined text-xl" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Background Decoration for Emotional Safety/Softness -->
+<div class="fixed top-0 right-0 -z-10 opacity-30 pointer-events-none">
+<div class="w-64 h-64 bg-secondary-fixed rounded-full blur-[80px] -mr-32 -mt-32"></div>
+</div>
+<div class="fixed bottom-0 left-0 -z-10 opacity-20 pointer-events-none">
+<div class="w-80 h-80 bg-primary-fixed rounded-full blur-[100px] -ml-40 -mb-40"></div>
+</div>
+
+
+</body></html>

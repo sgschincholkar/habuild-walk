@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Habuild Walk — Interactive Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px 16px 80px;
+  }
+
+  .label {
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .phone {
+    width: 390px;
+    background: #FAF7F2;
+    border-radius: 44px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06), inset 0 0 0 2px rgba(0,0,0,0.3);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .screen {
+    display: none;
+    position: relative;
+    width: 100%;
+  }
+  .screen.active { display: block; }
+
+  .screen img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Transparent clickable hotspot */
+  .hs {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 14px;
+    transition: background 0.1s;
+    -webkit-tap-highlight-color: rgba(46,125,50,0.18);
+  }
+  .hs:hover  { background: rgba(46,125,50,0.13); }
+  .hs:active { background: rgba(46,125,50,0.26); }
+
+  /* ── Floating "All screens" button ── */
+  #map-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: #2E7D32;
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    padding: 12px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+    z-index: 1000;
+  }
+  #map-btn:hover { background: #1b5e20; }
+
+  /* ── Screen map overlay ── */
+  #map-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 999;
+    overflow-y: auto;
+    padding: 32px 16px 48px;
+  }
+  #map-overlay.open { display: block; }
+
+  .map-inner {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #1c1c1c;
+    border-radius: 20px;
+    padding: 28px 22px 22px;
+  }
+  .map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+  }
+  .map-header h2 { color: #fff; font-size: 17px; font-weight: 700; }
+  .map-close-x {
+    background: #333;
+    border: none;
+    color: #aaa;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .map-close-x:hover { background: #444; color: #fff; }
+
+  .map-section { margin-bottom: 18px; }
+  .map-section h3 {
+    color: #81c784;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .map-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+  .map-item {
+    background: #272727;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: #d4d4d4;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    line-height: 1.3;
+  }
+  .map-item:hover { background: #2E7D32; color: #fff; border-color: #2E7D32; }
+</style>
+</head>
+<body>
+
+<p class="label">Habuild Walk · Interactive Prototype</p>
+
+<div class="phone" id="phone">
+
+  <!-- ══════════════════════════════════════════
+       ONBOARDING (9 screens)
+  ══════════════════════════════════════════ -->
+
+  <!-- 1 · Welcome -->
+  <div class="screen active" id="s-welcome">
+    <img src="screens/stitch_habuild_wellness_walking__welcome_to_habuild_walk.png" alt="Welcome" />
+    <!-- Get Started -->
+    <div class="hs" style="left:5%;width:90%;top:83%;height:8%" onclick="go('s-choose-style')"></div>
+    <!-- Sign In -->
+    <div class="hs" style="left:20%;width:60%;top:92%;height:5%" onclick="go('s-login')"></div>
+  </div>
+
+  <!-- 2 · Choose Intention Style -->
+  <div class="screen" id="s-choose-style">
+    <img src="screens/stitch_habuild_wellness_walking__choose_intention_style.png" alt="Choose Intention Style" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:2%;height:5%" onclick="go('s-welcome')"></div>
+    <!-- Plan my week card (RECOMMENDED, top) -->
+    <div class="hs" style="left:4%;width:92%;top:16%;height:14%" onclick="go('s-set-weekly')"></div>
+    <!-- Plan daily card -->
+    <div class="hs" style="left:4%;width:92%;top:31%;height:12%" onclick="go('s-set-daily')"></div>
+    <!-- Continue button -->
+    <div class="hs" style="left:5%;width:90%;top:86%;height:8%" onclick="go('s-set-weekly')"></div>
+  </div>
+
+  <!-- 3 · Set Daily Intention -->
+  <div class="screen" id="s-set-daily">
+    <img src="screens/stitch_habuild_wellness_walking__set_daily_intention.png" alt="Set Daily Intention" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:2%;height:5%" onclick="go('s-choose-style')"></div>
+    <!-- Review my intention -->
+    <div class="hs" style="left:5%;width:90%;top:88%;height:8%" onclick="go('s-confirm-daily')"></div>
+  </div>
+
+  <!-- 4 · Set Weekly Plan -->
+  <div class="screen" id="s-set-weekly">
+    <img src="screens/stitch_habuild_wellness_walking__set_weekly_plan.png" alt="Set Weekly Plan" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:3%;height:6%" onclick="go('s-choose-style')"></div>
+    <!-- Review my plan -->
+    <div class="hs" style="left:5%;width:90%;top:88%;height:8%" onclick="go('s-confirm-weekly')"></div>
+  </div>
+
+  <!-- 5 · Confirm Daily Intention -->
+  <div class="screen" id="s-confirm-daily">
+    <img src="screens/stitch_habuild_wellness_walking__confirm_daily_intention.png" alt="Confirm Daily Intention" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:2%;height:5%" onclick="go('s-set-daily')"></div>
+    <!-- Set my intention -->
+    <div class="hs" style="left:5%;width:90%;top:78%;height:8%" onclick="go('s-login')"></div>
+    <!-- Edit plan -->
+    <div class="hs" style="left:20%;width:60%;top:87%;height:5%" onclick="go('s-set-daily')"></div>
+  </div>
+
+  <!-- 6 · Confirm Weekly Plan -->
+  <div class="screen" id="s-confirm-weekly">
+    <img src="screens/stitch_habuild_wellness_walking__confirm_weekly_plan.png" alt="Confirm Weekly Plan" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:3%;height:5%" onclick="go('s-set-weekly')"></div>
+    <!-- Set my weekly plan -->
+    <div class="hs" style="left:5%;width:90%;top:80%;height:9%" onclick="go('s-login')"></div>
+    <!-- Edit plan -->
+    <div class="hs" style="left:20%;width:60%;top:90%;height:5%" onclick="go('s-set-weekly')"></div>
+  </div>
+
+  <!-- 7 · Login After Commitment -->
+  <div class="screen" id="s-login">
+    <img src="screens/stitch_habuild_wellness_walking__login_after_commitment.png" alt="Login After Commitment" />
+    <!-- Continue with Phone -->
+    <div class="hs" style="left:5%;width:90%;top:79%;height:8%" onclick="go('s-reminder')"></div>
+    <!-- Continue as Guest -->
+    <div class="hs" style="left:15%;width:70%;top:89%;height:5%" onclick="go('s-guest-mode')"></div>
+  </div>
+
+  <!-- 8 · Guest Mode -->
+  <div class="screen" id="s-guest-mode">
+    <img src="screens/stitch_habuild_wellness_walking__guest_mode_entry.png" alt="Guest Mode" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:2%;height:5%" onclick="go('s-login')"></div>
+    <!-- Continue with Phone -->
+    <div class="hs" style="left:5%;width:90%;top:79%;height:8%" onclick="go('s-reminder')"></div>
+    <!-- Continue as Guest -->
+    <div class="hs" style="left:15%;width:70%;top:89%;height:5%" onclick="go('s-reminder')"></div>
+  </div>
+
+  <!-- 9 · Reminder Permission -->
+  <div class="screen" id="s-reminder">
+    <img src="screens/stitch_habuild_wellness_walking__reminder_permission.png" alt="Reminder Permission" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:2%;height:4%" onclick="go('s-login')"></div>
+    <!-- Enable reminders -->
+    <div class="hs" style="left:5%;width:90%;top:83%;height:8%" onclick="go('s-home')"></div>
+    <!-- Skip for now -->
+    <div class="hs" style="left:15%;width:70%;top:92%;height:5%" onclick="go('s-home')"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       HOME (6 screens)
+  ══════════════════════════════════════════ -->
+
+  <!-- 10 · Walk Streak Home -->
+  <div class="screen" id="s-home">
+    <img src="screens/stitch_habuild_wellness_walking__walk_streak_home_design_audit.png" alt="Walk Streak Home" />
+    <!-- Start Walk -->
+    <div class="hs" style="left:5%;width:90%;top:55%;height:8%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- 11 · AI Coach Guidance Home -->
+  <div class="screen" id="s-ai-coach-home">
+    <img src="screens/stitch_habuild_wellness_walking__ai_coach_guidance_home.png" alt="AI Coach Home" />
+    <!-- Start Your Walk -->
+    <div class="hs" style="left:5%;width:90%;top:73%;height:8%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- 12 · Empty Home (First Use) -->
+  <div class="screen" id="s-empty-home">
+    <img src="screens/stitch_habuild_wellness_walking__empty_home_first_use.png" alt="Empty Home" />
+    <!-- Start your first walk -->
+    <div class="hs" style="left:5%;width:90%;top:37%;height:8%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- 13 · Rest Day -->
+  <div class="screen" id="s-rest-day">
+    <img src="screens/stitch_habuild_wellness_walking__rest_day.png" alt="Rest Day" />
+    <!-- Take a short walk -->
+    <div class="hs" style="left:5%;width:90%;top:72%;height:8%" onclick="go('s-start-walk')"></div>
+    <!-- Back to Home -->
+    <div class="hs" style="left:5%;width:90%;top:81%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- 14 · Loading State -->
+  <div class="screen" id="s-loading">
+    <img src="screens/stitch_habuild_wellness_walking__loading_state.png" alt="Loading" />
+    <!-- Tap anywhere to skip to home -->
+    <div class="hs" style="left:0;width:100%;top:8%;height:82%" title="Tap to continue" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- 15 · Error / Empty States -->
+  <div class="screen" id="s-error">
+    <img src="screens/stitch_habuild_wellness_walking__error_empty_states.png" alt="Error States" />
+    <!-- Set an intention -->
+    <div class="hs" style="left:5%;width:90%;top:76%;height:8%" onclick="go('s-set-daily')"></div>
+    <!-- Go to Home -->
+    <div class="hs" style="left:5%;width:90%;top:85%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Progress (active) -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PLANNING (7 screens)
+  ══════════════════════════════════════════ -->
+
+  <!-- 16 · Edit Today's Plan -->
+  <div class="screen" id="s-edit-plan">
+    <img src="screens/stitch_habuild_wellness_walking__edit_today_s_plan.png" alt="Edit Today's Plan" />
+    <!-- X close -->
+    <div class="hs" style="left:2%;width:10%;top:2%;height:5%" onclick="go('s-home')"></div>
+    <!-- Save for today -->
+    <div class="hs" style="left:5%;width:90%;top:85%;height:8%" onclick="go('s-weekly-override')"></div>
+    <!-- Keep original plan -->
+    <div class="hs" style="left:15%;width:70%;top:94%;height:5%" onclick="go('s-home')"></div>
+  </div>
+
+  <!-- 17 · Weekly Override Confirmation -->
+  <div class="screen" id="s-weekly-override">
+    <img src="screens/stitch_habuild_wellness_walking__weekly_override_confirmation.png" alt="Weekly Override" />
+    <!-- X close -->
+    <div class="hs" style="left:2%;width:10%;top:2%;height:5%" onclick="go('s-home')"></div>
+    <!-- Save for today -->
+    <div class="hs" style="left:5%;width:90%;top:79%;height:8%" onclick="go('s-home')"></div>
+    <!-- Keep original plan -->
+    <div class="hs" style="left:15%;width:70%;top:89%;height:5%" onclick="go('s-edit-plan')"></div>
+  </div>
+
+  <!-- 18 · Choose Time -->
+  <div class="screen" id="s-choose-time">
+    <img src="screens/stitch_habuild_wellness_walking__choose_time.png" alt="Choose Time" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:2%;height:5%" onclick="go('s-set-daily')"></div>
+    <!-- Set my intention -->
+    <div class="hs" style="left:5%;width:90%;top:87%;height:8%" onclick="go('s-confirm-daily')"></div>
+  </div>
+
+  <!-- 19 · Choose Duration -->
+  <div class="screen" id="s-choose-duration">
+    <img src="screens/stitch_habuild_wellness_walking__choose_duration_fixed_header.png" alt="Choose Duration" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:2%;height:5%" onclick="go('s-set-daily')"></div>
+    <!-- Continue -->
+    <div class="hs" style="left:5%;width:90%;top:87%;height:8%" onclick="go('s-confirm-daily')"></div>
+  </div>
+
+  <!-- 20 · Choose Place -->
+  <div class="screen" id="s-choose-place">
+    <img src="screens/stitch_habuild_wellness_walking__choose_place_refined.png" alt="Choose Place" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:2%;height:5%" onclick="go('s-set-daily')"></div>
+    <!-- Continue -->
+    <div class="hs" style="left:5%;width:90%;top:87%;height:8%" onclick="go('s-confirm-daily')"></div>
+  </div>
+
+  <!-- 21 · Choose Days -->
+  <div class="screen" id="s-choose-days">
+    <img src="screens/stitch_habuild_wellness_walking__choose_days.png" alt="Choose Days" />
+    <!-- Back -->
+    <div class="hs" style="left:2%;width:12%;top:2%;height:5%" onclick="go('s-set-weekly')"></div>
+    <!-- Continue -->
+    <div class="hs" style="left:5%;width:90%;top:87%;height:8%" onclick="go('s-confirm-weekly')"></div>
+  </div>
+
+  <!-- 22 · Log Steps -->
+  <div class="screen" id="s-log-steps">
+    <img src="screens/stitch_habuild_wellness_walking__log_steps.png" alt="Log Steps" />
+    <!-- Save steps -->
+    <div class="hs" style="left:5%;width:90%;top:52%;height:8%" onclick="go('s-home')"></div>
+    <!-- Cancel -->
+    <div class="hs" style="left:5%;width:90%;top:61%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       WALKING (6 screens)
+  ══════════════════════════════════════════ -->
+
+  <!-- 23 · Start Walk Transition -->
+  <div class="screen" id="s-start-walk">
+    <img src="screens/stitch_habuild_wellness_walking__start_walk_transition.png" alt="Start Walk Transition" />
+    <!-- Start with route tracking -->
+    <div class="hs" style="left:5%;width:90%;top:72%;height:8%" onclick="go('s-location-permission')"></div>
+    <!-- Start without tracking -->
+    <div class="hs" style="left:5%;width:90%;top:81%;height:7%" onclick="go('s-walk-in-progress')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- 24 · Location Permission -->
+  <div class="screen" id="s-location-permission">
+    <img src="screens/stitch_habuild_wellness_walking__location_permission_fixed_header.png" alt="Location Permission" />
+    <!-- Enable route tracking -->
+    <div class="hs" style="left:5%;width:90%;top:72%;height:8%" onclick="go('s-walk-in-progress')"></div>
+    <!-- Continue without tracking -->
+    <div class="hs" style="left:10%;width:80%;top:81%;height:6%" onclick="go('s-walk-in-progress')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- 25 · Walk In Progress -->
+  <div class="screen" id="s-walk-in-progress">
+    <img src="screens/stitch_habuild_wellness_walking__walk_in_progress.png" alt="Walk In Progress" />
+    <!-- Stop Walk -->
+    <div class="hs" style="left:5%;width:90%;top:72%;height:8%" onclick="go('s-walk-route-summary')"></div>
+    <!-- Pause -->
+    <div class="hs" style="left:5%;width:90%;top:81%;height:7%" onclick="go('s-walk-in-progress')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- 26 · Walk Route Summary -->
+  <div class="screen" id="s-walk-route-summary">
+    <img src="screens/stitch_habuild_wellness_walking__walk_route_summary.png" alt="Walk Route Summary" />
+    <!-- Save to History -->
+    <div class="hs" style="left:5%;width:90%;top:80%;height:8%" onclick="go('s-complete-walk')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- 27 · Complete Walk -->
+  <div class="screen" id="s-complete-walk">
+    <img src="screens/stitch_habuild_wellness_walking__complete_walk_celebration.png" alt="Complete Walk" />
+    <!-- Save my walk -->
+    <div class="hs" style="left:5%;width:90%;top:85%;height:8%" onclick="go('s-first-walk-success')"></div>
+    <!-- Back to Home -->
+    <div class="hs" style="left:15%;width:70%;top:94%;height:5%" onclick="go('s-home')"></div>
+  </div>
+
+  <!-- 28 · First Walk Success -->
+  <div class="screen" id="s-first-walk-success">
+    <img src="screens/stitch_habuild_wellness_walking__first_walk_success.png" alt="First Walk Success" />
+    <!-- Back to Home -->
+    <div class="hs" style="left:5%;width:90%;top:76%;height:8%" onclick="go('s-home')"></div>
+    <!-- View my progress -->
+    <div class="hs" style="left:5%;width:90%;top:85%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PROGRESS (2 screens)
+  ══════════════════════════════════════════ -->
+
+  <!-- 29 · Weekly Progress -->
+  <div class="screen" id="s-weekly-progress">
+    <img src="screens/stitch_habuild_wellness_walking__weekly_progress.png" alt="Weekly Progress" />
+    <!-- Tap walk list area → Walk History -->
+    <div class="hs" style="left:5%;width:90%;top:50%;height:35%" title="View walk history" onclick="go('s-walk-history')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- 30 · Walk History -->
+  <div class="screen" id="s-walk-history">
+    <img src="screens/stitch_habuild_wellness_walking__walk_history.png" alt="Walk History" />
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Progress (back to weekly) -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+    <!-- Bottom nav: Settings -->
+    <div class="hs" style="left:70%;width:25%;top:93%;height:7%" onclick="go('s-settings')"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SETTINGS (5 screens)
+  ══════════════════════════════════════════ -->
+
+  <!-- 31 · Settings -->
+  <div class="screen" id="s-settings">
+    <img src="screens/stitch_habuild_wellness_walking__settings.png" alt="Settings" />
+    <!-- Notification Settings row -->
+    <div class="hs" style="left:5%;width:90%;top:44%;height:7%" onclick="go('s-whatsapp-nudges')"></div>
+    <!-- WhatsApp Reminders row -->
+    <div class="hs" style="left:5%;width:90%;top:52%;height:7%" onclick="go('s-whatsapp-nudges')"></div>
+    <!-- Sign out row (lower, scrolled area) -->
+    <div class="hs" style="left:5%;width:90%;top:80%;height:7%" onclick="go('s-signout-confirm')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+  </div>
+
+  <!-- 32 · WhatsApp Nudges -->
+  <div class="screen" id="s-whatsapp-nudges">
+    <img src="screens/stitch_habuild_wellness_walking__whatsapp_nudges_settings.png" alt="WhatsApp Nudges" />
+    <!-- Save Settings -->
+    <div class="hs" style="left:5%;width:90%;top:85%;height:8%" onclick="go('s-notification-success')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+  </div>
+
+  <!-- 33 · Notification Success -->
+  <div class="screen" id="s-notification-success">
+    <img src="screens/stitch_habuild_wellness_walking__notification_success.png" alt="Notification Success" />
+    <!-- Back arrow -->
+    <div class="hs" style="left:2%;width:12%;top:2%;height:5%" onclick="go('s-settings')"></div>
+    <!-- Go to Home -->
+    <div class="hs" style="left:5%;width:90%;top:85%;height:8%" onclick="go('s-home')"></div>
+  </div>
+
+  <!-- 34 · Sign Out Confirmation -->
+  <div class="screen" id="s-signout-confirm">
+    <img src="screens/stitch_habuild_wellness_walking__signout_confirmation_1.png" alt="Sign Out Confirmation" />
+    <!-- Stay signed in (primary) -->
+    <div class="hs" style="left:5%;width:90%;top:57%;height:8%" onclick="go('s-settings')"></div>
+    <!-- Sign out (secondary) -->
+    <div class="hs" style="left:5%;width:90%;top:66%;height:7%" onclick="go('s-welcome')"></div>
+    <!-- Bottom nav: Home -->
+    <div class="hs" style="left:0%;width:22%;top:93%;height:7%" onclick="go('s-home')"></div>
+    <!-- Bottom nav: Walk -->
+    <div class="hs" style="left:23%;width:20%;top:93%;height:7%" onclick="go('s-start-walk')"></div>
+    <!-- Bottom nav: Progress -->
+    <div class="hs" style="left:46%;width:20%;top:93%;height:7%" onclick="go('s-weekly-progress')"></div>
+  </div>
+
+  <!-- 35 · Delete Account Confirmation -->
+  <div class="screen" id="s-delete-confirm">
+    <img src="screens/stitch_habuild_wellness_walking__delete_account_confirmation.png" alt="Delete Account" />
+    <!-- Keep my account (primary) -->
+    <div class="hs" style="left:5%;width:90%;top:75%;height:8%" onclick="go('s-settings')"></div>
+    <!-- Delete account (link) -->
+    <div class="hs" style="left:20%;width:60%;top:85%;height:6%" onclick="go('s-welcome')"></div>
+  </div>
+
+</div><!-- /phone -->
+
+<!-- ── All Screens button ── -->
+<button id="map-btn" onclick="openMap()">☰ All screens</button>
+
+<!-- ── Screen map overlay ── -->
+<div id="map-overlay">
+  <div class="map-inner">
+    <div class="map-header">
+      <h2>Habuild Walk · All Screens</h2>
+      <button class="map-close-x" onclick="closeMap()">✕</button>
+    </div>
+
+    <div class="map-section">
+      <h3>Onboarding</h3>
+      <div class="map-grid">
+        <div class="map-item" onclick="goFromMap('s-welcome')">Welcome</div>
+        <div class="map-item" onclick="goFromMap('s-choose-style')">Choose Intention Style</div>
+        <div class="map-item" onclick="goFromMap('s-set-daily')">Set Daily Intention</div>
+        <div class="map-item" onclick="goFromMap('s-set-weekly')">Set Weekly Plan</div>
+        <div class="map-item" onclick="goFromMap('s-confirm-daily')">Confirm Daily</div>
+        <div class="map-item" onclick="goFromMap('s-confirm-weekly')">Confirm Weekly</div>
+        <div class="map-item" onclick="goFromMap('s-login')">Login After Commitment</div>
+        <div class="map-item" onclick="goFromMap('s-guest-mode')">Guest Mode</div>
+        <div class="map-item" onclick="goFromMap('s-reminder')">Reminder Permission</div>
+      </div>
+    </div>
+
+    <div class="map-section">
+      <h3>Home</h3>
+      <div class="map-grid">
+        <div class="map-item" onclick="goFromMap('s-home')">Walk Streak Home</div>
+        <div class="map-item" onclick="goFromMap('s-ai-coach-home')">AI Coach Home</div>
+        <div class="map-item" onclick="goFromMap('s-empty-home')">Empty Home (First Use)</div>
+        <div class="map-item" onclick="goFromMap('s-rest-day')">Rest Day</div>
+        <div class="map-item" onclick="goFromMap('s-loading')">Loading State</div>
+        <div class="map-item" onclick="goFromMap('s-error')">Error / Empty States</div>
+      </div>
+    </div>
+
+    <div class="map-section">
+      <h3>Planning</h3>
+      <div class="map-grid">
+        <div class="map-item" onclick="goFromMap('s-edit-plan')">Edit Today's Plan</div>
+        <div class="map-item" onclick="goFromMap('s-weekly-override')">Weekly Override</div>
+        <div class="map-item" onclick="goFromMap('s-choose-time')">Choose Time</div>
+        <div class="map-item" onclick="goFromMap('s-choose-duration')">Choose Duration</div>
+        <div class="map-item" onclick="goFromMap('s-choose-place')">Choose Place</div>
+        <div class="map-item" onclick="goFromMap('s-choose-days')">Choose Days</div>
+        <div class="map-item" onclick="goFromMap('s-log-steps')">Log Steps</div>
+      </div>
+    </div>
+
+    <div class="map-section">
+      <h3>Walking</h3>
+      <div class="map-grid">
+        <div class="map-item" onclick="goFromMap('s-start-walk')">Start Walk Transition</div>
+        <div class="map-item" onclick="goFromMap('s-location-permission')">Location Permission</div>
+        <div class="map-item" onclick="goFromMap('s-walk-in-progress')">Walk In Progress</div>
+        <div class="map-item" onclick="goFromMap('s-walk-route-summary')">Walk Route Summary</div>
+        <div class="map-item" onclick="goFromMap('s-complete-walk')">Complete Walk</div>
+        <div class="map-item" onclick="goFromMap('s-first-walk-success')">First Walk Success</div>
+      </div>
+    </div>
+
+    <div class="map-section">
+      <h3>Progress</h3>
+      <div class="map-grid">
+        <div class="map-item" onclick="goFromMap('s-weekly-progress')">Weekly Progress</div>
+        <div class="map-item" onclick="goFromMap('s-walk-history')">Walk History</div>
+      </div>
+    </div>
+
+    <div class="map-section">
+      <h3>Settings</h3>
+      <div class="map-grid">
+        <div class="map-item" onclick="goFromMap('s-settings')">Settings</div>
+        <div class="map-item" onclick="goFromMap('s-whatsapp-nudges')">WhatsApp Nudges</div>
+        <div class="map-item" onclick="goFromMap('s-notification-success')">Notification Success</div>
+        <div class="map-item" onclick="goFromMap('s-signout-confirm')">Sign Out Confirm</div>
+        <div class="map-item" onclick="goFromMap('s-delete-confirm')">Delete Account</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function go(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Loading screen auto-advances
+    if (id === 's-loading') {
+      setTimeout(() => {
+        if (document.getElementById('s-loading').classList.contains('active')) go('s-home');
+      }, 1500);
+    }
+  }
+
+  function openMap()  { document.getElementById('map-overlay').classList.add('open'); }
+  function closeMap() { document.getElementById('map-overlay').classList.remove('open'); }
+  function goFromMap(id) { closeMap(); go(id); }
+
+  // Close overlay on backdrop click
+  document.getElementById('map-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeMap();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#88d982",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#ffb786",
+                        "on-secondary-fixed-variant": "#723600",
+                        "inverse-primary": "#88d982",
+                        "secondary-fixed": "#ffdcc6",
+                        "surface-bright": "#f7fbf0",
+                        "on-primary-container": "#cbffc2",
+                        "outline": "#707a6c",
+                        "on-tertiary-fixed-variant": "#7f2448",
+                        "on-error-container": "#93000a",
+                        "on-background": "#181d17",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#0d631b",
+                        "secondary-container": "#fc820c",
+                        "surface-variant": "#e0e4da",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffd9e2",
+                        "primary-fixed": "#a3f69c",
+                        "on-primary-fixed-variant": "#005312",
+                        "on-tertiary-container": "#ffedf0",
+                        "on-surface-variant": "#40493d",
+                        "accent-sky": "#0288D1",
+                        "text-charcoal": "#212121",
+                        "surface-container-highest": "#e0e4da",
+                        "on-primary-fixed": "#002204",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#5e2c00",
+                        "on-secondary-fixed": "#311300",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#923357",
+                        "surface-tint": "#1b6d24",
+                        "inverse-surface": "#2d322b",
+                        "background-warm": "#FAF7F2",
+                        "on-tertiary-fixed": "#3f001c",
+                        "surface-dim": "#d7dbd2",
+                        "primary-container": "#2e7d32",
+                        "surface-container-high": "#e5eadf",
+                        "tertiary-fixed-dim": "#ffb1c7",
+                        "surface": "#f7fbf0",
+                        "surface-white": "#FFFFFF",
+                        "tertiary-container": "#b14b6f",
+                        "on-surface": "#181d17",
+                        "background": "#f7fbf0",
+                        "secondary": "#964900",
+                        "surface-container": "#ebefe5",
+                        "inverse-on-surface": "#eef2e8",
+                        "outline-variant": "#bfcaba",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f1f5eb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "max-width": "480px",
+                        "gutter": "20px",
+                        "card-padding": "20px",
+                        "section-gap": "24px",
+                        "base-unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-important": ["Inter"],
+                        "body-base": ["Inter"],
+                        "cta-text": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-important": ["20px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-base": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "cta-text": ["18px", { "lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-md-mobile": ["22px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #FAF7F2;
+            color: #181d17;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 20px -2px rgba(45, 106, 79, 0.08);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-base text-body-base min-h-screen flex justify-center">
+<main class="w-full max-w-max-width bg-background-warm flex flex-col min-h-screen relative pb-32">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-50 bg-background-warm">
+<div class="flex justify-between items-center px-gutter py-4 max-w-max-width mx-auto">
+<button class="p-2 hover:opacity-80 transition-opacity active:scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="close">close</span>
+</button>
+<h1 class="text-headline-md-mobile font-headline-md text-primary flex items-center gap-1">
+                    Habuild Walk<span class="w-2 h-2 rounded-full bg-secondary-container mt-2"></span>
+</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="px-gutter flex flex-col items-center text-center mt-8 space-y-section-gap">
+<!-- Contextual Icon -->
+<div class="w-20 h-20 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[40px]" data-icon="calendar_today" style="font-variation-settings: 'FILL' 0;">calendar_today</span>
+</div>
+<!-- Headline & Body -->
+<div class="space-y-3">
+<h2 class="text-headline-md-mobile font-headline-md text-text-charcoal">Just for today</h2>
+<p class="text-on-surface-variant font-body-base text-body-base px-4">
+                    These changes only affect today's routine. Your weekly rhythm will stay exactly as you set it.
+                </p>
+</div>
+<!-- Summary Card -->
+<div class="w-full bg-surface-white rounded-xl p-card-padding soft-shadow border border-outline-variant/30 text-left space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-medium text-sm uppercase tracking-wider">Revised Plan</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed text-xs px-2 py-1 rounded-full font-bold">Today Only</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-low p-3 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="directions_walk">directions_walk</span>
+</div>
+<div>
+<p class="font-headline-md text-primary text-body-lg">Terrace Walk</p>
+<p class="text-on-surface-variant font-body-base">20 min · Afternoon</p>
+</div>
+</div>
+</div>
+<!-- AI Coach Card -->
+<div class="w-full bg-[#FFF9F2] rounded-xl p-card-padding border border-secondary-container/20 flex gap-4 text-left">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+</div>
+<div>
+<h4 class="font-label-important text-on-secondary-fixed text-sm mb-1">AI Coach Tip</h4>
+<p class="text-on-surface-variant text-sm italic">
+                        "Life happens! A short walk or a change of scenery is a great way to stay in your rhythm."
+                    </p>
+</div>
+</div>
+</div>
+<!-- Action Area (Fixed Bottom) -->
+<div class="fixed bottom-0 left-0 right-0 max-w-max-width mx-auto bg-background-warm/80 backdrop-blur-md px-gutter py-6 flex flex-col gap-4">
+<button class="w-full h-14 bg-primary text-on-primary rounded-full font-cta-text text-cta-text flex items-center justify-center shadow-lg active:scale-98 transition-transform duration-200">
+                Save for today
+            </button>
+<button class="w-full py-2 text-primary font-cta-text text-cta-text hover:bg-surface-container-low rounded-full transition-colors active:scale-95 duration-150">
+                Keep original plan
+            </button>
+</div>
+</main>
+<!-- Visual Polish: Decorative Background Accent -->
+<div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-max-width h-64 pointer-events-none -z-10 opacity-30">
+<div class="absolute top-0 right-0 w-48 h-48 bg-primary-fixed-dim blur-[100px] rounded-full"></div>
+<div class="absolute bottom-0 left-0 w-48 h-48 bg-secondary-fixed blur-[100px] rounded-full"></div>
+</div>
+</body></html>

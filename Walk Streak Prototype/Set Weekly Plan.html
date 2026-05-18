@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Set Weekly Plan · Habuild Walk Everyday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="components.jsx"></script>
+
+<script type="text/babel" data-screen-label="Set Weekly Plan">
+const { useState, useMemo } = React;
+
+// ── Local helpers ────────────────────────────────────────────
+const DAY_LABELS = ['S','M','T','W','T','F','S'];                 // index 0..6 (Sun..Sat)
+const DAY_NAMES  = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+const PRESETS = {
+  every:    { label: 'Every day',     days: [0,1,2,3,4,5,6] },
+  weekdays: { label: 'Weekdays',      days: [1,2,3,4,5] },
+  alternate:{ label: 'Alternate days', days: [1,3,5] },             // Mon · Wed · Fri
+  custom:   { label: 'Choose days',   days: null },
+};
+
+const TIMES = [
+  { key: 'morning',   label: 'Morning',   sub: '~7:00 am' },
+  { key: 'afternoon', label: 'Afternoon', sub: '~1:00 pm' },
+  { key: 'evening',   label: 'Evening',   sub: '~6:00 pm' },
+  { key: 'custom',    label: 'Choose time', sub: 'Pick exact time' },
+];
+
+const PLACES = ['Home','Terrace','Park'];
+
+// ── Header (back + step indicator) ───────────────────────────
+function OnboardingHeader({ step = 2, total = 3, onBack }) {
+  return (
+    <div style={{
+      paddingTop: 56,                            // clear status bar / island
+      padding: '56px 20px 8px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    }}>
+      <button onClick={onBack} aria-label="Back"
+        className="pressable"
+        style={{
+          width: 44, height: 44, borderRadius: '50%',
+          background: 'var(--color-surface)',
+          border: 'none', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          boxShadow: 'var(--shadow-sm)',
+        }}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="var(--color-text)" strokeWidth="2.2"
+             strokeLinecap="round" strokeLinejoin="round">
+          <path d="M15 6l-6 6 6 6"/>
+        </svg>
+      </button>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        {Array.from({ length: total }).map((_, i) => {
+          const isActive = i === step - 1;
+          const isDone   = i < step - 1;
+          return (
+            <div key={i} style={{
+              width: isActive ? 22 : 6,
+              height: 6,
+              borderRadius: 3,
+              background: isActive || isDone ? 'var(--color-primary)' : 'var(--color-primary-100)',
+              transition: 'width 200ms var(--ease-out)',
+            }} />
+          );
+        })}
+      </div>
+
+      <div style={{ width: 44 }} />
+    </div>
+  );
+}
+
+// ── Section label ────────────────────────────────────────────
+function SectionLabel({ children, hint }) {
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <div style={{
+        fontSize: 18,
+        fontWeight: 600,
+        color: 'var(--color-text)',
+        letterSpacing: '-0.01em',
+      }}>{children}</div>
+      {hint && (
+        <div style={{
+          fontSize: 14,
+          color: 'var(--color-text-tertiary)',
+          marginTop: 2,
+        }}>{hint}</div>
+      )}
+    </div>
+  );
+}
+
+// ── Selection chip used across all sections ─────────────────
+function SelectChip({ selected, onClick, children, sub, fullWidth = false, style = {} }) {
+  return (
+    <button
+      onClick={onClick}
+      className="pressable"
+      style={{
+        minHeight: 56,
+        padding: '10px 14px',
+        width: fullWidth ? '100%' : 'auto',
+        borderRadius: 'var(--radius-pill)',
+        background: selected ? 'var(--color-primary)' : 'var(--color-surface)',
+        color: selected ? 'var(--color-text-onPrimary)' : 'var(--color-text)',
+        border: 'none',
+        boxShadow: selected ? 'var(--shadow-md)' : 'var(--shadow-sm)',
+        cursor: 'pointer',
+        display: 'inline-flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 2,
+        fontFamily: 'inherit',
+        transition: 'background var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out)',
+        ...style,
+      }}>
+      <span style={{
+        fontSize: 16, fontWeight: 600, whiteSpace: 'nowrap',
+      }}>{children}</span>
+      {sub && (
+        <span style={{
+          fontSize: 12,
+          color: selected ? 'rgba(255,255,255,0.78)' : 'var(--color-text-tertiary)',
+          fontWeight: 500,
+          whiteSpace: 'nowrap',
+        }}>{sub}</span>
+      )}
+    </button>
+  );
+}
+
+// ── Day circle pill ──────────────────────────────────────────
+function DayPill({ label, selected, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="pressable"
+      style={{
+        width: 40, height: 40, borderRadius: '50%',
+        background: selected ? 'var(--color-primary)' : 'var(--color-surface)',
+        color: selected ? '#fff' : 'var(--color-text-secondary)',
+        fontSize: 15, fontWeight: 600,
+        border: 'none',
+        cursor: 'pointer',
+        boxShadow: selected ? 'var(--shadow-sm)' : 'inset 0 0 0 1px var(--color-hairline)',
+        transition: 'all var(--duration-base) var(--ease-out)',
+        fontFamily: 'inherit',
+      }}>
+      {label}
+    </button>
+  );
+}
+
+// ── Main screen ─────────────────────────────────────────────
+function WeeklyPlanScreen() {
+  const [preset, setPreset] = useState('weekdays');
+  const [days, setDays] = useState(PRESETS.weekdays.days);
+  const [time, setTime] = useState('morning');
+  const [duration, setDuration] = useState(20);
+  const [place, setPlace] = useState('Park');
+
+  const applyPreset = (key) => {
+    setPreset(key);
+    if (PRESETS[key].days) setDays(PRESETS[key].days);
+    else if (days.length === 0) setDays([1,3,5]); // give choose-days a starting set
+  };
+
+  const toggleDay = (d) => {
+    setPreset('custom');
+    setDays(prev => prev.includes(d)
+      ? prev.filter(x => x !== d)
+      : [...prev, d].sort((a,b) => a-b));
+  };
+
+  const dayCount = days.length;
+
+  return (
+    <div style={{
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: 0,
+    }}>
+      <OnboardingHeader step={2} total={3} onBack={() => alert('← Choose Intention Style')} />
+
+      {/* Scrollable content */}
+      <div className="no-scrollbar fade-up" style={{
+        flex: 1,
+        overflowY: 'auto',
+        padding: '8px 24px 24px',
+      }}>
+        {/* Title block */}
+        <div style={{ marginBottom: 28 }}>
+          <h1 style={{
+            margin: 0,
+            fontSize: 28,
+            fontWeight: 700,
+            lineHeight: 1.2,
+            letterSpacing: '-0.02em',
+            color: 'var(--color-text)',
+            textWrap: 'pretty',
+          }}>Plan your week</h1>
+          <p style={{
+            margin: '10px 0 0',
+            fontSize: 16,
+            lineHeight: 1.5,
+            color: 'var(--color-text-secondary)',
+            textWrap: 'pretty',
+          }}>Set a gentle routine. You can always change today's walk later.</p>
+        </div>
+
+        {/* ── Days ─────────────────────────────────────── */}
+        <section style={{ marginBottom: 32 }}>
+          <SectionLabel hint={dayCount > 0
+            ? `${dayCount} ${dayCount === 1 ? 'walk' : 'walks'} a week`
+            : 'Choose at least one day'}>
+            Walking days
+          </SectionLabel>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 10,
+            marginBottom: 16,
+          }}>
+            {Object.entries(PRESETS).map(([key, p]) => (
+              <SelectChip key={key}
+                selected={preset === key}
+                onClick={() => applyPreset(key)}
+                fullWidth>
+                {p.label}
+              </SelectChip>
+            ))}
+          </div>
+
+          {/* Day pill row */}
+          <div style={{
+            background: 'var(--color-surface)',
+            borderRadius: 'var(--radius-lg)',
+            padding: '14px 12px',
+            boxShadow: 'var(--shadow-sm)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(7, 1fr)',
+            justifyItems: 'center',
+            gap: 4,
+          }}>
+            {DAY_LABELS.map((lbl, i) => (
+              <DayPill key={i}
+                label={lbl}
+                selected={days.includes(i)}
+                onClick={() => toggleDay(i)} />
+            ))}
+          </div>
+        </section>
+
+        {/* ── Time ─────────────────────────────────────── */}
+        <section style={{ marginBottom: 32 }}>
+          <SectionLabel hint="A time you usually have free">
+            Default time
+          </SectionLabel>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 10,
+          }}>
+            {TIMES.map(t => (
+              <SelectChip key={t.key}
+                selected={time === t.key}
+                onClick={() => setTime(t.key)}
+                sub={t.sub}
+                fullWidth>
+                {t.label}
+              </SelectChip>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Duration ─────────────────────────────────── */}
+        <section style={{ marginBottom: 32 }}>
+          <SectionLabel hint="A short walk still counts">
+            Default duration
+          </SectionLabel>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: 8,
+          }}>
+            {[10, 20, 30].map(d => (
+              <SelectChip key={d}
+                selected={duration === d}
+                onClick={() => setDuration(d)}
+                fullWidth>
+                {d} min
+              </SelectChip>
+            ))}
+            <SelectChip
+              selected={![10,20,30].includes(duration)}
+              onClick={() => setDuration(15)}
+              fullWidth>
+              Custom
+            </SelectChip>
+          </div>
+        </section>
+
+        {/* ── Place ────────────────────────────────────── */}
+        <section style={{ marginBottom: 8 }}>
+          <SectionLabel hint="Where the walk usually happens">
+            Default place
+          </SectionLabel>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 8,
+          }}>
+            {PLACES.map(p => (
+              <SelectChip key={p}
+                selected={place === p}
+                onClick={() => setPlace(p)}>
+                {p}
+              </SelectChip>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* Sticky footer CTA */}
+      <div style={{
+        padding: '14px 24px 46px',
+        background: 'linear-gradient(to top, var(--color-app-bg) 60%, rgba(250,247,242,0))',
+      }}>
+        <PrimaryButton
+          size="lg"
+          disabled={dayCount === 0}
+          onClick={() => alert('→ Confirm Weekly Plan')}
+          trailingIcon={
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          }
+        >
+          Review my plan
+        </PrimaryButton>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Stage>
+      <PhoneFrame>
+        <WeeklyPlanScreen />
+      </PhoneFrame>
+    </Stage>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reminder Permission · Habuild Walk Everyday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="components.jsx"></script>
+
+<script type="text/babel" data-screen-label="Reminder Permission">
+
+// ── WhatsApp-style notification preview ────────────────────
+// Doesn't use WhatsApp's exact logo/trademark — uses a generic
+// chat-bubble glyph in WhatsApp's recognisable green to set the
+// channel without infringing brand.
+function WhatsAppPreview({ name = 'Asha', time = '6:30 am', durationMin = 20, place = 'park', walkTime = '7:00 am' }) {
+  return (
+    <div style={{
+      background: 'var(--color-surface)',
+      borderRadius: 'var(--radius-lg)',
+      padding: 18,
+      boxShadow: 'var(--shadow-md)',
+      position: 'relative',
+    }}>
+      {/* "Now" pill in the corner, like a notification banner */}
+      <div style={{
+        position: 'absolute',
+        top: -10, right: 18,
+        padding: '4px 10px',
+        background: 'var(--color-primary-100)',
+        color: 'var(--color-primary-700)',
+        fontSize: 11,
+        fontWeight: 700,
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        borderRadius: 'var(--radius-pill)',
+        boxShadow: 'var(--shadow-sm)',
+      }}>Preview</div>
+
+      {/* Header row: icon + sender + time */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        marginBottom: 10,
+      }}>
+        {/* WhatsApp-style green chat icon */}
+        <div style={{
+          width: 36, height: 36, borderRadius: 10,
+          background: '#25D366',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          boxShadow: '0 2px 6px rgba(37,211,102,0.30)',
+        }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+            <path d="M20 12a8 8 0 11-3.3-6.4L20 4l-1.4 3.6A8 8 0 0120 12zm-8 4a4 4 0 003.6-2.3l-1.4-.7a2.5 2.5 0 01-4.4 0l-1.4.7A4 4 0 0012 16z"/>
+          </svg>
+        </div>
+
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{
+            fontSize: 14,
+            fontWeight: 700,
+            color: 'var(--color-text)',
+            letterSpacing: '-0.01em',
+          }}>Habuild Walk</div>
+          <div style={{
+            fontSize: 12,
+            color: 'var(--color-text-tertiary)',
+            fontWeight: 500,
+          }}>via WhatsApp</div>
+        </div>
+
+        <div style={{
+          fontSize: 12,
+          color: 'var(--color-text-tertiary)',
+          fontWeight: 500,
+          whiteSpace: 'nowrap',
+        }}>{time}</div>
+      </div>
+
+      {/* Message body */}
+      <div style={{
+        fontSize: 15,
+        lineHeight: 1.55,
+        color: 'var(--color-text)',
+      }}>
+        <span style={{ fontWeight: 600 }}>Good morning, {name}.</span>{' '}
+        Your {durationMin}-minute walk at the {place} is set for {walkTime}. Take it gentle.
+      </div>
+    </div>
+  );
+}
+
+// ── Trust bullets ───────────────────────────────────────────
+function TrustRow({ children }) {
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: 12,
+      padding: '12px 0',
+    }}>
+      <div style={{
+        width: 24, height: 24, flexShrink: 0,
+        borderRadius: '50%',
+        background: 'var(--color-primary-100)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        marginTop: 1,
+      }}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="var(--color-primary)" strokeWidth="3"
+             strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12l5 5L20 7"/>
+        </svg>
+      </div>
+      <div style={{
+        flex: 1,
+        fontSize: 15,
+        lineHeight: 1.5,
+        color: 'var(--color-text)',
+      }}>{children}</div>
+    </div>
+  );
+}
+
+function ReminderPermissionScreen() {
+  return (
+    <div style={{
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: 0,
+    }}>
+      {/* Header — no back (post-commitment, post-auth) */}
+      <div style={{
+        padding: '56px 20px 8px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        minHeight: 64,
+      }}>
+        {/* skip option lives in secondary CTA — keep header clean */}
+      </div>
+
+      <div className="no-scrollbar fade-up" style={{
+        flex: 1,
+        overflowY: 'auto',
+        padding: '8px 24px 0',
+      }}>
+        {/* Title block */}
+        <div style={{ marginBottom: 28 }}>
+          <h1 style={{
+            margin: 0,
+            fontSize: 28,
+            fontWeight: 700,
+            lineHeight: 1.2,
+            letterSpacing: '-0.02em',
+            color: 'var(--color-text)',
+            textWrap: 'pretty',
+          }}>A small reminder,<br/>on WhatsApp</h1>
+          <p style={{
+            margin: '12px 0 0',
+            fontSize: 16,
+            lineHeight: 1.55,
+            color: 'var(--color-text-secondary)',
+            textWrap: 'pretty',
+          }}>
+            We'll send one kind message at <strong style={{ color: 'var(--color-text)', fontWeight: 700 }}>6:30 am</strong>, before your morning walk — never more.
+          </p>
+        </div>
+
+        {/* Preview card */}
+        <div style={{ marginBottom: 28 }}>
+          <WhatsAppPreview
+            name="Asha"
+            time="6:30 am"
+            durationMin={20}
+            place="park"
+            walkTime="7:00 am" />
+        </div>
+
+        {/* Trust bullets */}
+        <div style={{
+          background: 'var(--color-surface)',
+          borderRadius: 'var(--radius-lg)',
+          padding: '8px 18px',
+          boxShadow: 'var(--shadow-sm)',
+          marginBottom: 16,
+        }}>
+          <TrustRow>
+            <strong style={{ fontWeight: 600 }}>One message per planned walk.</strong>
+            <span style={{ color: 'var(--color-text-secondary)' }}> No spam, ever.</span>
+          </TrustRow>
+          <div style={{ height: 1, background: 'var(--color-hairline)' }} />
+          <TrustRow>
+            <strong style={{ fontWeight: 600 }}>WhatsApp only.</strong>
+            <span style={{ color: 'var(--color-text-secondary)' }}> No app notifications. No emails.</span>
+          </TrustRow>
+          <div style={{ height: 1, background: 'var(--color-hairline)' }} />
+          <TrustRow>
+            <strong style={{ fontWeight: 600 }}>Change anytime.</strong>
+            <span style={{ color: 'var(--color-text-secondary)' }}> Pause or turn off in Settings.</span>
+          </TrustRow>
+        </div>
+      </div>
+
+      {/* Sticky footer CTAs */}
+      <div style={{
+        padding: '14px 24px 30px',
+        background: 'linear-gradient(to top, var(--color-app-bg) 70%, rgba(250,247,242,0))',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 6,
+      }}>
+        <PrimaryButton
+          size="lg"
+          onClick={() => alert('→ Walk Streak Home (reminders on)')}
+          leadingIcon={
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 11.5a8.4 8.4 0 01-1 4 8.5 8.5 0 01-7.6 4.5 8.4 8.4 0 01-4-1L3 21l2-5.5a8.4 8.4 0 01-1-4 8.5 8.5 0 014.5-7.6 8.4 8.4 0 014-1A8.5 8.5 0 0121 11.5z"/>
+            </svg>
+          }
+        >
+          Send me reminders
+        </PrimaryButton>
+        <SecondaryButton
+          size="lg"
+          onClick={() => alert('→ Walk Streak Home (no reminders)')}
+        >
+          Not right now
+        </SecondaryButton>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Stage>
+      <PhoneFrame>
+        <ReminderPermissionScreen />
+      </PhoneFrame>
+    </Stage>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

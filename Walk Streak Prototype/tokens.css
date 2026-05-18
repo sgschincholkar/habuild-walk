@@ -1,0 +1,154 @@
+/* ────────────────────────────────────────────────────────────
+   Habuild Walk Everyday — Design Tokens
+   Source of truth for color, type, spacing, radius, shadow, motion.
+   Reconciles Guidelines.md + Prototyping Spec.
+   ──────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Color ─────────────────────────────────────────────── */
+  /* Surfaces */
+  --color-app-bg: #FAF7F2;        /* warm cream */
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F4F1EE; /* secondary surface from guidelines */
+  --color-surface-sunken: #EFEAE2;
+
+  /* Brand */
+  --color-primary: #2D6A4F;       /* deep sage, calm green */
+  --color-primary-700: #245840;
+  --color-primary-300: #6B9B85;
+  --color-primary-100: #E2ECE7;
+  --color-primary-50:  #F1F6F3;
+
+  /* Accents (used sparingly) */
+  --color-accent: #F9A825;        /* warm amber — streak/celebration */
+  --color-accent-soft: #FCE9BF;
+  --color-nudge: #F57C00;         /* coach/nudge — desaturated orange */
+  --color-nudge-soft: #FBE3CC;
+  --color-weather: #0288D1;       /* weather chip only */
+  --color-weather-soft: #D6EAF5;
+
+  /* States */
+  --color-error: #E53E3E;
+  --color-error-soft: #FBE0E0;
+  --color-success: #2D6A4F;
+  --color-rest: #C9C2B6;          /* rest day / muted */
+
+  /* Text */
+  --color-text: #212121;          /* primary body */
+  --color-text-secondary: #5C5C5C;
+  --color-text-tertiary: #8A8A8A;
+  --color-text-onPrimary: #FFFFFF;
+
+  /* Borders / hairlines (used sparingly — prefer shadow) */
+  --color-hairline: rgba(33, 33, 33, 0.06);
+
+  /* ── Type ──────────────────────────────────────────────── */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-display: 32px;    /* hero */
+  --text-h1: 28px;
+  --text-h2: 22px;
+  --text-label: 20px;      /* important labels minimum */
+  --text-body: 16px;       /* body min */
+  --text-small: 14px;      /* secondary only — never primary copy */
+  --text-micro: 12px;      /* legal / very tertiary */
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-relaxed: 1.6;
+
+  /* ── Spacing (4px base) ────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  --gutter: 24px;          /* preferred horizontal gutter */
+
+  /* ── Radius ────────────────────────────────────────────── */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+  --radius-pill: 9999px;
+
+  /* ── Shadow (warm, soft) ───────────────────────────────── */
+  --shadow-sm: 0 2px 8px -4px rgba(45, 106, 79, 0.10),
+               0 1px 2px rgba(45, 106, 79, 0.04);
+  --shadow-md: 0 8px 24px -12px rgba(45, 106, 79, 0.18),
+               0 2px 6px rgba(45, 106, 79, 0.04);
+  --shadow-lg: 0 18px 40px -20px rgba(45, 106, 79, 0.22),
+               0 4px 10px rgba(45, 106, 79, 0.05);
+  --shadow-press: 0 1px 2px rgba(45, 106, 79, 0.08);
+
+  /* ── Motion ────────────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 250ms;     /* onboarding */
+
+  /* ── Sizing ────────────────────────────────────────────── */
+  --btn-h: 48px;
+  --btn-h-lg: 56px;
+  --input-h: 56px;
+  --nav-h: 72px;
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text);
+  background: #1a1a1a; /* outside-device area when shown in iframe */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+button { font-family: inherit; }
+
+/* ── Screen surface (inside the device frame) ────────────── */
+.app-surface {
+  background: var(--color-app-bg);
+  min-height: 100%;
+  width: 100%;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+}
+
+/* ── Stage: center the device frame in viewport ──────────── */
+.stage {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(180deg, #1f1f1f 0%, #111 100%);
+}
+
+/* ── Gentle fade-in for screen content ───────────────────── */
+@keyframes habuild-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: habuild-fade-up var(--duration-slow) var(--ease-out) both;
+}
+
+/* ── Press feedback (cards / chips) ──────────────────────── */
+.pressable { transition: transform var(--duration-base) var(--ease-out),
+                          box-shadow var(--duration-base) var(--ease-out); }
+.pressable:active { transform: scale(0.985); box-shadow: var(--shadow-press); }
+
+/* ── Hide scrollbars inside the device ───────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Confirm Weekly Plan - Habuild</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#bfcaba",
+                    "surface-container-low": "#f1f5eb",
+                    "on-primary-fixed-variant": "#005312",
+                    "secondary-fixed": "#ffdcc6",
+                    "surface-tint": "#1b6d24",
+                    "text-charcoal": "#212121",
+                    "tertiary-container": "#b14b6f",
+                    "inverse-surface": "#2d322b",
+                    "surface-container-high": "#e5eadf",
+                    "on-secondary-container": "#5e2c00",
+                    "surface": "#f7fbf0",
+                    "outline": "#707a6c",
+                    "on-tertiary-fixed": "#3f001c",
+                    "inverse-primary": "#88d982",
+                    "on-tertiary-fixed-variant": "#7f2448",
+                    "error-container": "#ffdad6",
+                    "primary-fixed": "#a3f69c",
+                    "primary": "#0d631b",
+                    "primary-container": "#2e7d32",
+                    "on-tertiary-container": "#ffedf0",
+                    "tertiary-fixed": "#ffd9e2",
+                    "primary-fixed-dim": "#88d982",
+                    "on-background": "#181d17",
+                    "background": "#f7fbf0",
+                    "background-warm": "#FAF7F2",
+                    "surface-container": "#ebefe5",
+                    "inverse-on-surface": "#eef2e8",
+                    "secondary-container": "#fc820c",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#311300",
+                    "tertiary-fixed-dim": "#ffb1c7",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#ffb786",
+                    "on-surface-variant": "#40493d",
+                    "on-primary-container": "#cbffc2",
+                    "on-secondary-fixed-variant": "#723600",
+                    "surface-white": "#FFFFFF",
+                    "error": "#ba1a1a",
+                    "tertiary": "#923357",
+                    "surface-dim": "#d7dbd2",
+                    "surface-container-highest": "#e0e4da",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#181d17",
+                    "surface-variant": "#e0e4da",
+                    "surface-bright": "#f7fbf0",
+                    "on-error-container": "#93000a",
+                    "accent-sky": "#0288D1",
+                    "secondary": "#964900",
+                    "on-primary-fixed": "#002204",
+                    "surface-container-lowest": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width": "480px",
+                    "gutter": "20px",
+                    "base-unit": "4px",
+                    "section-gap": "24px",
+                    "card-padding": "20px"
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FAF7F2; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .shadow-soft { shadow-[0_4px_12px_rgba(0,0,0,0.05)] }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex justify-center min-h-screen">
+<div class="w-full max-w-max-width bg-background-warm flex flex-col min-h-screen relative overflow-x-hidden">
+<!-- Header -->
+<header class="flex flex-col px-gutter pt-6 pb-4">
+<div class="flex items-center justify-between mb-4">
+<button aria-label="Go back" class="w-12 h-12 flex items-center justify-start text-on-surface">
+<span class="material-symbols-outlined" style="font-size: 28px;">arrow_back</span>
+</button>
+<h1 class="text-headline-md text-on-surface flex-1 text-center pr-12">Confirm Weekly Plan</h1>
+</div>
+<!-- Progress Indicator (Step 3 of 3) -->
+<div class="flex w-full justify-center gap-3 py-2">
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+<div class="h-2 w-8 rounded-full bg-primary"></div>
+</div>
+</header>
+<main class="flex-1 px-gutter pb-32">
+<!-- Weekly Plan Summary Card -->
+<section class="bg-surface-white rounded-xl shadow-sm overflow-hidden mb-section-gap border border-surface-container">
+<div class="w-full h-48 bg-center bg-no-repeat bg-cover" data-alt="A tranquil view of a lush green city park during early morning sunrise with soft golden light filtering through autumn trees and a paved walking path. The atmosphere is peaceful, clean, and inviting, reflecting a healthy lifestyle and the calm habit of morning exercise. High-quality photography with a natural color palette emphasizing greens and warm ambers." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAFKD06CZ_yGsS5v8TLC_WJLFGzh4ZNtEKMQ6iWGdDO-Xn09jxHzrPk8oLMylriv3WhU2oibZEJwXA19Ofwv9YT_nfnJceavlPRvIFI4O-NUnPoX3cqs8elwebR9qyhPfcVuTQzhIyPtelAjiDyW-6kO2I-bWj2NwuWBA-RgtR6euDYOnn2BnmB2Nk36C93h7Exxs8QesBjt0YnGr5gIJIMKHqDTydy3EHgT-Q2stESZYwaZtkwwoUq48b9AE15irMmVRYJH-09GwE");'>
+</div>
+<div class="p-card-padding flex flex-col gap-5">
+<!-- Schedule visualization -->
+<div>
+<p class="text-on-surface-variant text-sm font-medium mb-3 uppercase tracking-wider">Your Schedule</p>
+<div class="flex justify-between items-center gap-2">
+<div class="flex-1 flex flex-col items-center gap-1 p-2 rounded-lg bg-primary-fixed text-on-primary-fixed">
+<span class="text-xs font-bold">M</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 p-2 rounded-lg bg-primary-fixed text-on-primary-fixed">
+<span class="text-xs font-bold">T</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 p-2 rounded-lg bg-primary-fixed text-on-primary-fixed">
+<span class="text-xs font-bold">W</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 p-2 rounded-lg bg-primary-fixed text-on-primary-fixed">
+<span class="text-xs font-bold">T</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 p-2 rounded-lg bg-primary-fixed text-on-primary-fixed">
+<span class="text-xs font-bold">F</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 p-2 rounded-lg border border-outline-variant text-outline">
+<span class="text-xs font-bold">S</span>
+<span class="material-symbols-outlined">circle</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 p-2 rounded-lg border border-outline-variant text-outline">
+<span class="text-xs font-bold">S</span>
+<span class="material-symbols-outlined">circle</span>
+</div>
+</div>
+</div>
+<!-- Details list -->
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<div class="p-2 bg-surface-container-low rounded-lg text-primary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-xs">Time &amp; Duration</span>
+<span class="text-on-surface font-semibold">Morning (~7:00 am) • 20 mins</span>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="p-2 bg-surface-container-low rounded-lg text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-xs">Place</span>
+<span class="text-on-surface font-semibold">Local Park</span>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="p-2 bg-surface-container-low rounded-lg text-primary">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-xs">Reminder</span>
+<span class="text-on-surface font-semibold">WhatsApp nudge at 6:45 am</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Coach Card -->
+<section class="bg-secondary-fixed p-card-padding rounded-xl border border-secondary-fixed-dim shadow-sm flex gap-4">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 bg-on-secondary-container rounded-full flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-on-secondary-container font-bold text-base">AI Coach Tip</p>
+<p class="text-on-secondary-fixed-variant text-sm leading-relaxed">
+                        This looks like a sustainable rhythm. Committing to a weekly rhythm helps build the habit 3x faster.
+                    </p>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Actions -->
+<footer class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-max-width bg-background-warm/90 backdrop-blur-md px-gutter pt-4 pb-8 flex flex-col items-center gap-4">
+<button class="w-full h-[56px] bg-primary text-on-primary rounded-full flex items-center justify-center gap-2 shadow-lg hover:bg-primary-container transition-colors active:scale-95">
+<span class="text-cta-text">Set my weekly plan</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="text-on-surface-variant font-semibold text-sm hover:text-primary transition-colors flex items-center gap-1 p-2">
+<span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
+                Edit plan
+            </button>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#40493d",
+                        "surface-container-highest": "#e0e4da",
+                        "primary-fixed": "#a3f69c",
+                        "on-secondary-fixed": "#311300",
+                        "surface-container-low": "#f1f5eb",
+                        "surface-variant": "#e0e4da",
+                        "surface-white": "#FFFFFF",
+                        "tertiary": "#923357",
+                        "surface-bright": "#f7fbf0",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#ffd9e2",
+                        "surface-container": "#ebefe5",
+                        "inverse-surface": "#2d322b",
+                        "surface": "#f7fbf0",
+                        "on-primary": "#ffffff",
+                        "primary": "#0d631b",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005312",
+                        "tertiary-container": "#b14b6f",
+                        "on-primary-fixed": "#002204",
+                        "error": "#ba1a1a",
+                        "secondary": "#964900",
+                        "text-charcoal": "#212121",
+                        "surface-container-high": "#e5eadf",
+                        "on-primary-container": "#cbffc2",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#88d982",
+                        "tertiary-fixed-dim": "#ffb1c7",
+                        "inverse-primary": "#88d982",
+                        "secondary-container": "#fc820c",
+                        "accent-sky": "#0288D1",
+                        "outline": "#707a6c",
+                        "outline-variant": "#bfcaba",
+                        "background-warm": "#FAF7F2",
+                        "on-surface": "#181d17",
+                        "on-background": "#181d17",
+                        "on-tertiary-fixed-variant": "#7f2448",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#ffedf0",
+                        "secondary-fixed": "#ffdcc6",
+                        "inverse-on-surface": "#eef2e8",
+                        "surface-dim": "#d7dbd2",
+                        "surface-tint": "#1b6d24",
+                        "secondary-fixed-dim": "#ffb786",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#5e2c00",
+                        "on-secondary-fixed-variant": "#723600",
+                        "background": "#f7fbf0",
+                        "primary-container": "#2e7d32",
+                        "on-tertiary-fixed": "#3f001c",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base-unit": "4px",
+                        "max-width": "480px",
+                        "section-gap": "24px",
+                        "gutter": "20px",
+                        "card-padding": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "cta-text": ["Inter"],
+                        "label-important": ["Inter"],
+                        "body-base": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "cta-text": ["18px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "label-important": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "body-base": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #FAF7F2;
+            font-family: 'Inter', sans-serif;
+            color: #181d17;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface dark:bg-inverse-surface">
+<div class="flex items-center px-gutter py-4 max-w-max-width mx-auto justify-center"><div class="flex-1 flex justify-start">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+</div>
+<h1 class="text-xl font-semibold text-primary dark:text-primary-fixed-dim whitespace-nowrap px-4">
+                    Habuild Walk
+                </h1>
+<div class="flex-1"></div></div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-max-width px-gutter pb-32 flex flex-col items-center">
+<!-- Illustration Section -->
+<div class="w-full pt-6 flex justify-center">
+<div class="w-full aspect-[4/3] rounded-[32px] overflow-hidden bg-surface-container-low shadow-sm">
+<img alt="Supportive illustration of women walking together in a park" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uj9XeqH7vLyCknfvjXAZscrdTm4hsT6bveLwya7w7-W3SoVkEm4xpGnDp1M0p7F4ysXriRafiEZRL8NayCu6CMqSX67BVqyDg2dkjKPcqvpUMCqSpI3G92AISMFaOwz94qR9R27tV8Nd-iWZvDWBrL7LEL-a3NAdb6psoPFOKv65fRoxPGAF0kp-81dChNhL90Vo--PbHjkG79AeA1BJoHAOawVI9O7eHNBsUeRdoYLJoCkD7O-7N5JSp4"/>
+</div>
+</div>
+<!-- Supportive Content Card -->
+<div class="w-full mt-section-gap space-y-6">
+<div class="bg-surface-white rounded-[24px] p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.04)] text-center border border-outline-variant/30">
+<h2 class="font-headline-md text-headline-md text-primary mb-3">
+                    See your path, celebrate your distance.
+                </h2>
+<p class="font-body-base text-body-base text-on-surface-variant">
+                    Tracking your route helps you visualize your progress and discover new favorite spots in your neighborhood.
+                </p>
+</div>
+<div class="space-y-4 px-2">
+<p class="font-body-base text-body-base text-center italic text-on-surface-variant/80">
+                    "Your privacy is important. We only use location to show your walking route."
+                </p>
+<p class="font-body-base text-body-base text-center font-medium text-secondary">
+                    You can walk without tracking too. Your rhythm matters most.
+                </p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="w-full mt-auto pt-8 flex flex-col gap-4">
+<button class="w-full h-14 bg-primary text-on-primary rounded-full font-cta-text text-cta-text flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150 shadow-md">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>near_me</span>
+                Enable route tracking
+            </button>
+<button class="w-full h-14 bg-transparent text-primary font-cta-text text-cta-text flex items-center justify-center hover:bg-surface-container-low rounded-full transition-colors">
+                Continue without tracking
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 max-w-max-width left-1/2 -translate-x-1/2 rounded-t-xl bg-surface-white dark:bg-inverse-surface shadow-[0_-4px_12px_0_rgba(0,0,0,0.05)] border-t border-outline-variant dark:border-outline">
+<div class="flex justify-around items-center px-4 py-3">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container dark:bg-primary-fixed dark:text-on-primary-fixed rounded-full px-4 py-1 hover:opacity-80 transition-opacity active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>home</span>
+<span class="font-label-important text-label-important text-xs mt-0.5">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">directions_walk</span>
+<span class="font-label-important text-label-important text-xs mt-0.5">Walk</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-important text-label-important text-xs mt-0.5">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-important text-label-important text-xs mt-0.5">Settings</span>
+</a>
+</div>
+</nav>
+</body></html>

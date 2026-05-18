@@ -1,0 +1,193 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "primary": "#0d631b",
+                  "surface-bright": "#f7fbf0",
+                  "surface-container-low": "#f1f5eb",
+                  "outline": "#707a6c",
+                  "surface-white": "#FFFFFF",
+                  "secondary-container": "#fc820c",
+                  "secondary": "#964900",
+                  "tertiary": "#923357",
+                  "surface-container-lowest": "#ffffff",
+                  "surface-container-highest": "#e0e4da",
+                  "surface-container-high": "#e5eadf",
+                  "on-surface": "#181d17",
+                  "primary-container": "#2e7d32",
+                  "surface-container": "#ebefe5",
+                  "error-container": "#ffdad6",
+                  "on-secondary-fixed-variant": "#723600",
+                  "on-primary-fixed": "#002204",
+                  "inverse-primary": "#88d982",
+                  "background-warm": "#FAF7F2",
+                  "surface": "#f7fbf0",
+                  "on-error": "#ffffff",
+                  "outline-variant": "#bfcaba",
+                  "surface-tint": "#1b6d24",
+                  "on-error-container": "#93000a",
+                  "on-secondary": "#ffffff",
+                  "on-primary-fixed-variant": "#005312",
+                  "secondary-fixed-dim": "#ffb786",
+                  "error": "#ba1a1a",
+                  "tertiary-container": "#b14b6f",
+                  "on-surface-variant": "#40493d",
+                  "background": "#f7fbf0",
+                  "secondary-fixed": "#ffdcc6",
+                  "on-tertiary-container": "#ffedf0",
+                  "inverse-on-surface": "#eef2e8",
+                  "accent-sky": "#0288D1",
+                  "on-primary": "#ffffff",
+                  "surface-dim": "#d7dbd2",
+                  "text-charcoal": "#212121",
+                  "surface-variant": "#e0e4da",
+                  "on-tertiary-fixed-variant": "#7f2448",
+                  "primary-fixed-dim": "#88d982",
+                  "tertiary-fixed-dim": "#ffb1c7",
+                  "on-secondary-container": "#5e2c00",
+                  "tertiary-fixed": "#ffd9e2",
+                  "on-secondary-fixed": "#311300",
+                  "on-background": "#181d17",
+                  "inverse-surface": "#2d322b",
+                  "on-tertiary": "#ffffff",
+                  "primary-fixed": "#a3f69c",
+                  "on-tertiary-fixed": "#3f001c",
+                  "on-primary-container": "#cbffc2"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "gutter": "20px",
+                  "base-unit": "4px",
+                  "max-width": "480px",
+                  "section-gap": "24px",
+                  "card-padding": "20px"
+          },
+          "fontFamily": {
+                  "label-important": ["Inter"],
+                  "body-lg": ["Inter"],
+                  "cta-text": ["Inter"],
+                  "headline-lg": ["Inter"],
+                  "body-base": ["Inter"],
+                  "headline-md": ["Inter"]
+          },
+          "fontSize": {
+                  "label-important": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                  "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "cta-text": ["18px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                  "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                  "body-base": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background-color: #FAF7F2;
+    }
+    .main-canvas {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-base text-on-surface">
+<div class="main-canvas pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background-warm z-50 flex justify-between items-center px-gutter h-16 max-w-max-width mx-auto"><div class="flex items-center w-10 justify-start"><!-- Leading slot: Empty for this screen --></div><div class="flex-1 flex justify-center"><h1 class="text-headline-md font-semibold text-primary">Habuild Walk</h1></div><div class="flex items-center w-10 justify-end"><button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-high text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95"><span class="material-symbols-outlined">person</span></button></div></header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-gutter">
+<!-- Greeting -->
+<section class="mt-8 mb-6">
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-text-charcoal">Enjoy your rest day, Sarah.</h2>
+<p class="font-body-base text-body-base text-on-surface-variant mt-1">Breathe in, exhale, and simply be.</p>
+</section>
+<!-- Main Rest Card -->
+<div class="bg-surface-white rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] mb-section-gap">
+<div class="relative aspect-[4/3] bg-surface-container-low">
+<img alt="Restful scene" class="w-full h-full object-cover" data-alt="A peaceful and serene nature scene featuring a soft, sun-dappled forest path with lush greenery and warm golden hour lighting. The atmosphere is quiet, meditative, and restorative, with no people visible to emphasize a moment of personal stillness. The colors are muted greens and warm ambers, evoking a sense of gentle recovery and emotional safety." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAijc6zOBk8Elj9aJeLUrk5uOxoeuBBeKCM5TWVzy8bt-W8ew0dP-vQ5cuChcrJNDKiZaqhx02Fh4utD66ushN6wNH-UkZwmeBJdieUfzQzK_0c41uYqFG9EJbeLuW_1RIs4oxxQNbK7vGxlCVqrAY5TH_yrY5oc0v-8BzEmBG8weeB19otLGiX0Fc3xEHmSkEfR3BVZ-BHU8WdiAJaLkiCMCw-j6iZpIKE3A9rZlxSp7A0BgNsMudmCF36ArP_tRwN1KJRXRfbGkk">
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+<div class="p-card-padding">
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+            Today is a scheduled rest day. Giving your body time to recover is just as important as the walk itself.
+          </p>
+</div>
+</div>
+<!-- AI Coach Nudge (Soft Orange Card) -->
+<div class="bg-[#FBE3CC] rounded-xl p-card-padding flex gap-4 items-start shadow-sm mb-section-gap border border-secondary-fixed/30">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary" data-icon="spa" style="font-variation-settings: &quot;FILL&quot; 1;">spa</span>
+</div>
+<div>
+<p class="font-label-important text-on-secondary-container text-sm font-semibold mb-1">Gentle Rhythm</p>
+<p class="font-body-base text-body-base text-on-secondary-container leading-snug">
+            A gentle 5-minute stretch or a mindful breath can keep the rhythm alive without a full walk.
+          </p>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-4 mt-4">
+<button class="h-12 w-full rounded-full bg-primary text-on-primary font-cta-text text-cta-text shadow-md active:scale-95 transition-transform duration-150">
+          Take a short walk
+        </button>
+<button class="h-12 w-full rounded-full border-2 border-primary/20 text-primary font-cta-text text-cta-text active:scale-95 transition-transform duration-150 bg-white/50">
+          Back to Home
+        </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-max-width flex justify-around items-center py-2 px-4 pb-safe bg-surface-white rounded-t-xl shadow-[0_-4px_12px_0_rgba(0,0,0,0.05)] z-50">
+<!-- Home Active -->
+<a class="flex flex-col items-center justify-center text-primary p-2 hover:bg-surface-container-low rounded-full transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: &quot;FILL&quot; 1;">home</span>
+<span class="font-label-important-mobile text-label-important-mobile mt-1">Home</span>
+</a>
+<!-- Walk -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-low rounded-full transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="directions_walk">directions_walk</span>
+<span class="font-label-important-mobile text-label-important-mobile mt-1">Walk</span>
+</a>
+<!-- Progress -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-low rounded-full transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-label-important-mobile text-label-important-mobile mt-1">Progress</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-low rounded-full transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-important-mobile text-label-important-mobile mt-1">Settings</span>
+</a>
+</nav>
+</div>
+
+
+
+
+</body></html>

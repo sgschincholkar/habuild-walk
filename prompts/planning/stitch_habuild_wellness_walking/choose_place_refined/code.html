@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Habuild Walk - Choose Place</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2d322b",
+                    "tertiary-fixed-dim": "#ffb1c7",
+                    "text-charcoal": "#212121",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#ffedf0",
+                    "tertiary": "#923357",
+                    "on-tertiary-fixed": "#3f001c",
+                    "error-container": "#ffdad6",
+                    "surface": "#f7fbf0",
+                    "on-background": "#181d17",
+                    "inverse-primary": "#88d982",
+                    "surface-dim": "#d7dbd2",
+                    "on-secondary-container": "#5e2c00",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#005312",
+                    "secondary": "#964900",
+                    "primary-fixed": "#a3f69c",
+                    "primary": "#2D6A4F",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#eef2e8",
+                    "accent-sky": "#0288D1",
+                    "outline-variant": "#bfcaba",
+                    "background": "#FAF7F2",
+                    "surface-container-high": "#e5eadf",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#ebefe5",
+                    "surface-container-low": "#f1f5eb",
+                    "on-surface": "#181d17",
+                    "surface-variant": "#e0e4da",
+                    "on-tertiary-fixed-variant": "#7f2448",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#e0e4da",
+                    "outline": "#707a6c",
+                    "tertiary-container": "#b14b6f",
+                    "surface-white": "#FFFFFF",
+                    "secondary-fixed": "#ffdcc6",
+                    "tertiary-fixed": "#ffd9e2",
+                    "on-surface-variant": "#40493d",
+                    "primary-fixed-dim": "#88d982",
+                    "on-primary-container": "#cbffc2",
+                    "on-secondary-fixed-variant": "#723600",
+                    "secondary-container": "#fc820c",
+                    "primary-container": "#2e7d32",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#1b6d24",
+                    "secondary-fixed-dim": "#ffb786",
+                    "on-primary-fixed": "#002204",
+                    "surface-bright": "#f7fbf0",
+                    "on-secondary-fixed": "#311300",
+                    "background-warm": "#FAF7F2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "24px",
+                    "max-width": "480px",
+                    "card-padding": "20px",
+                    "base-unit": "4px",
+                    "gutter": "20px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "cta-text": ["Inter"],
+                    "body-base": ["Inter"],
+                    "label-important": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "cta-text": ["18px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-base": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-important": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAF7F2;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .shadow-warm {
+            box-shadow: 0 4px 20px -2px rgba(114, 54, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background-warm text-on-surface selection:bg-primary-fixed">
+<div class="max-w-max-width mx-auto min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-background-warm sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-gutter max-w-max-width mx-auto h-16">
+<button class="w-10 h-10 flex items-center justify-start text-on-surface-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<div class="flex items-center gap-1">
+<span class="text-[20px] font-bold text-primary">Habuild Walk</span>
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-container mt-1"></div>
+</div>
+<div class="flex gap-1.5 mt-1.5">
+<div class="h-1 w-6 rounded-full bg-primary/20"></div>
+<div class="h-1 w-6 rounded-full bg-primary"></div>
+<div class="h-1 w-6 rounded-full bg-primary/20"></div>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-end text-on-surface-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-gutter pt-6 pb-32">
+<section class="mb-8">
+<h1 class="text-[28px] leading-tight font-bold text-text-charcoal mb-2">Where will you walk?</h1>
+<p class="text-[16px] text-on-surface-variant">Choose a place that feels easy and safe today.</p>
+</section>
+<!-- Selection Options -->
+<div class="flex flex-col gap-4">
+<!-- Park Option (Selected) -->
+<div class="relative group cursor-pointer">
+<div class="w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-warm border-2 border-primary">
+<img alt="Serene park path" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uh_lkPg-Q7vopkGcFmhoTGpr0Qb7d42n1XU0Fzge4NQs5zZRv1CB9-2rkrMUfPsPpLQaT5aVvOwRPY4R8wNEJm0w5S4_9YdOYH-dgbS9QSXEH1uJlU7YuWt2XqYg0jXE7V1uqWmt54uLpqeYBf2Qrx-OHS-KBrrAhYN9iXnVewhS7oEPQ5XUw4OL1VtrJhaY0rRhqI5LaqD6JeaNEiOOkjeOdTpeAS2NRPYkhWp75beX-4c5rgBZnZRuQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-3">
+<div class="bg-primary text-white w-9 h-9 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="forest">forest</span>
+</div>
+<span class="text-xl text-white font-semibold">Park</span>
+</div>
+<div class="absolute top-4 right-4 bg-primary text-white rounded-full p-1 shadow-md">
+<span class="material-symbols-outlined text-[18px]" data-icon="check" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+</div>
+<!-- Terrace Option -->
+<div class="bg-surface-white rounded-2xl p-4 shadow-warm border border-outline-variant flex items-center justify-between hover:border-primary/30 transition-colors duration-200 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-low text-primary w-11 h-11 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="deck">deck</span>
+</div>
+<div>
+<span class="text-[18px] font-semibold text-text-charcoal block">Terrace</span>
+<p class="text-sm text-on-surface-variant">Fresh air, just steps away</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</div>
+<!-- Home Option -->
+<div class="relative group cursor-pointer">
+<div class="w-full h-24 rounded-2xl overflow-hidden shadow-warm border border-outline-variant flex hover:border-primary/30 transition-colors duration-200">
+<div class="w-1/3 h-full">
+<img alt="Cozy living room" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ujCjPmafUEf-LttVe_E4yDCX_DVDbzNPi5U8BakSg681BdGIwjrAu7U5sxI0w739QXUXMFPYXUiLzQeDxVpt8Qc4k7AjpLszKra-_SypZslXgNMPKseMPA_fJA6J0HILif3kd-wAnejW624O0DwfovJOnrR4wyCrkUKBf9NIHAuMTBJyNDYZMRL1as71OwCNj0JMryggSGiF2vOaU0XHa_pAwyEepSZkdQPgodB7oTejITf6ZYhJNgVmxo"/>
+</div>
+<div class="w-2/3 h-full bg-surface-white p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-low text-primary w-10 h-10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</div>
+<span class="text-[18px] font-semibold text-text-charcoal">Home</span>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Coach Tip -->
+<div class="mt-8 bg-secondary-fixed/10 border border-secondary-fixed-dim/20 rounded-2xl p-5 shadow-sm">
+<div class="flex gap-4 items-start">
+<div class="bg-secondary text-white p-2 rounded-xl mt-0.5 shadow-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-sm font-bold text-on-secondary-fixed-variant tracking-wide uppercase">AI Coach Tip</h3>
+<p class="text-[15px] text-on-secondary-fixed-variant leading-relaxed">
+                        "Many women start at home or on their terrace to build confidence first."
+                    </p>
+<p class="text-[13px] text-secondary/70 italic">— Your AI Companion</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Primary CTA Area -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-max-width p-gutter bg-gradient-to-t from-background-warm via-background-warm to-transparent z-40">
+<button class="w-full h-14 bg-primary text-white rounded-full flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:brightness-110 active:scale-[0.98] transition-all duration-200">
+<span class="font-cta-text text-cta-text">Set my intention</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="h-4"></div>
+</div>
+</div>
+</body></html>
